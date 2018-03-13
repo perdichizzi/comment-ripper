@@ -1,0 +1,66 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"description": "Description of the languages that are supported by the tool",
+	"type": "object",
+	"properties": {
+		"languages": {
+			"type": "array",
+			"minItems": 1,
+			"items": {
+				"type": "object",
+				"properties": {
+					"language": {
+						"type": "string"
+					},
+					"extensions": {
+						"type": "array",
+						"items": {
+							"type": "string",
+							"pattern": "^\\*\\.\\w{1,}$"
+						}
+					},
+					"single-line": {
+						"type": "array",
+						"items": {
+							"type": "string"
+						}
+					},
+					"position": {
+						"type": "array",
+						"items": {
+							"type": "object",
+							"properties": {
+								"column": {
+									"type": "number"
+								}
+							},
+							"additionalProperties": false
+						}
+					},
+					"multi-line-start": {
+						"type": "string"
+					},
+					"multi-line-end": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"language"
+				],
+				"dependencies": {
+					"multi-line-end": [
+						"multi-line-start"
+					],
+					"multi-line-start": [
+						"multi-line-end"
+					]
+				},
+				"additionalProperties": false
+			}
+		}
+	},
+	"required": [
+		"languages"
+	],
+	"additionalProperties": false
+}

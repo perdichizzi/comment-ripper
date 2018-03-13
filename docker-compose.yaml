@@ -1,0 +1,40 @@
+version: "3"
+
+services:
+  #comment-ripper:
+  #  image: comment-ripper:0.1
+  #  depends_on:
+  #    - mysql-comment
+  #  ports:
+  #    - "80:5000"
+
+  mysql-comment:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: comments
+    ports:
+      - "3308:3306"
+    volumes:
+      - "./data:/var/lib/mysql:rw" #with this share all data will be saved in the host and not in the container
+      - "./db_init:/docker-entrypoint-initdb.d"
+  admin:
+    image: adminer:latest
+    depends_on:
+      - mysql-comment
+    ports:
+      - "8080:8080"
+
+  comment-ripper:
+    image: comment-ripper:0.1
+    build: . #Builds the container by using the Dockerfile in current folder
+    environment:
+      MYSQL_HOST: mysql-comment
+      MYSQL_USER: root
+      MYSQL_PASSWORD: password
+      MYSQL_DATABASE: comments
+      PORT: 5000
+    depends_on:
+      - mysql-comment
+    ports:
+      - "80:5000"

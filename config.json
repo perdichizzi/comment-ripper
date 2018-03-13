@@ -1,0 +1,29 @@
+{
+	"languages":[
+		{
+			"language":"COBOL",
+			"extensions":["*.cbl"],
+			"single-line":["*","/"],
+			"position":[{"column":7}]
+		},
+		{
+			"language":"C",
+			"extensions":["*.c","*.log"],
+			"single-line":["//"],
+			"multi-line-start":"/*",
+			"multi-line-end":"*/"
+		},
+		{
+			"language":"ASP.NET",
+			"extensions":["*.aspx"],
+			"multi-line-start":"<%--",
+			"multi-line-end":"--%>"
+		},
+		{
+			"language":"HTML",
+			"extensions":["*.htm","*.html"],
+			"multi-line-start":"<!--",
+			"multi-line-end":"--!>"
+		}
+	]
+}
